@@ -109,6 +109,9 @@ public class we_fragment extends Fragment {
             }
         });
 
+
+
+
         return view;
 
 

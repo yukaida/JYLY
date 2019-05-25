@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,7 +37,9 @@ public class home_fragment extends Fragment {
     private List<Homeitem2> homeitemList2=new ArrayList<>();
     private SwipeRefreshLayout swipeRefreshLayout;
 
-
+    private ViewPager viewPager;
+    private View view1, view2, view3;
+    private List<View> viewList;//view数组
 
 
 
@@ -81,6 +85,54 @@ public class home_fragment extends Fragment {
                 refresh();
             }
         });
+
+
+        viewPager=view.findViewById(R.id.viewPager);
+
+        inflater=getLayoutInflater();
+        view1 = inflater.inflate(R.layout.layout_one, null);
+        view2 = inflater.inflate(R.layout.layout_two,null);
+        view3 = inflater.inflate(R.layout.layout_three, null);
+
+        viewList = new ArrayList<View>();// 将要分页显示的View装入数组中
+        viewList.add(view1);
+        viewList.add(view2);
+        viewList.add(view3);
+
+
+        PagerAdapter pagerAdapter = new PagerAdapter() {
+
+            @Override
+            public boolean isViewFromObject(View arg0, Object arg1) {
+                // TODO Auto-generated method stub
+                return arg0 == arg1;
+            }
+
+            @Override
+            public int getCount() {
+                // TODO Auto-generated method stub
+                return viewList.size();
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position,
+                                    Object object) {
+                // TODO Auto-generated method stub
+                container.removeView(viewList.get(position));
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                // TODO Auto-generated method stub
+                container.addView(viewList.get(position));
+                return viewList.get(position);
+            }
+        };
+
+
+        viewPager.setAdapter(pagerAdapter);
+
+    
 
 //    swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 //        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
