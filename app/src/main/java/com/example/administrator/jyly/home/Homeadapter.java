@@ -62,7 +62,7 @@ public class Homeadapter extends RecyclerView.Adapter<Homeadapter.homeViewholder
 
                         case 2:
                             Intent intent_toWebActivity2 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity2.putExtra("webUrl", "https:/");
+                            intent_toWebActivity2.putExtra("webUrl", "https:/www.baidu.com");
                             context.startActivity(intent_toWebActivity2);
                         break;
 
