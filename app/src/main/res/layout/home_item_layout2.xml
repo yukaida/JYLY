@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/home_imageView"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_background"
+        />
+
+    <TextView
+        android:id="@+id/home_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="10dp"
+        android:ellipsize="end"
+        android:maxWidth="8dp"
+        android:maxLines="3"
+        android:text="灵感源自南太平洋“阿达拉”人鱼传说，以清新海洋蓝为主色调，定制桁架鱼尾配合欢悦涌动的海豚与海浪，辅以星星点点银色球饰点缀其中，银光微闪，花架灵动，呈现自然舒爽的视觉体验。"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="#5E5E5E"
+        android:textSize="14sp" />
+</LinearLayout>

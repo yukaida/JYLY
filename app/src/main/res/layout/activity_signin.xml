@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signinActivity.SigninActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+    <ImageView
+        android:id="@+id/imageView_signin"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="173dp"
+        android:layout_marginBottom="92dp"
+        app:layout_constraintBottom_toTopOf="@+id/login_name2"
+        app:layout_constraintEnd_toEndOf="@+id/login_name2"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="@+id/login_name2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/aixin" />
+
+    <EditText
+        android:id="@+id/login_name2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="38dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="  用户名"
+        android:inputType="textPersonName"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/login_password2"
+        app:layout_constraintEnd_toEndOf="@+id/login_password2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/login_password2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_signin" />
+
+    <EditText
+        android:id="@+id/login_password2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:background="@drawable/rounded_edittext"
+        android:ems="10"
+        android:hint="  密码"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="false"
+        android:singleLine="false"
+        android:textAlignment="viewStart"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button_signin2"
+        app:layout_constraintEnd_toEndOf="@+id/button_signin2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/button_signin2"
+        app:layout_constraintTop_toBottomOf="@+id/login_name2" />
+
+    <Button
+        android:id="@+id/button_signin2"
+        android:layout_width="215dp"
+        android:layout_height="44dp"
+
+        android:layout_marginBottom="122dp"
+        android:background="@drawable/buttonshape"
+        android:text="注册"
+        android:textColor="@color/tab_unchecked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_password2" />
+
+</android.support.constraint.ConstraintLayout>

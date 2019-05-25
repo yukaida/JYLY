@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/pic_home"
+        android:title="首页" />
+    <item
+        android:id="@+id/navigation_design"
+        android:icon="@drawable/pic_design"
+        android:title="我要设计" />
+    <item
+        android:id="@+id/navigation_dsroom"
+        android:icon="@drawable/pic_dsroom"
+        android:title="婚纱墙" />
+    <item
+        android:id="@+id/navigation_we"
+        android:icon="@drawable/pic_we"
+        android:title="我们" />
+</menu>
