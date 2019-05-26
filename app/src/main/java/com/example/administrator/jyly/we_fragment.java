@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.administrator.jyly.MyPublish.MyPublishActivity;
-import com.example.administrator.jyly.MyReceiver.MyReceiver;
 import com.example.administrator.jyly.loginAvtivity.LoginActivity;
 import com.example.administrator.jyly.we.Item;
 import com.example.administrator.jyly.we.We_recyclerView_adapter;
@@ -32,8 +31,9 @@ public class we_fragment extends Fragment {
     private RecyclerView recyclerView;
     private We_recyclerView_adapter we_recyclerView_adapter;
     private Button button_call;
-    private MyReceiver myReceiver;
-
+    private Button button_kefu1;
+    private Button button_kefu2;
+    private Button button_kefu3;
     @Nullable
     @Override
 
@@ -47,15 +47,22 @@ public class we_fragment extends Fragment {
         we_recyclerView_adapter = new We_recyclerView_adapter(getContext(), itemList);
         recyclerView.setAdapter(we_recyclerView_adapter);
 
+        Button button_zuji = view.findViewById(R.id.button4);
+        button_zuji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "足迹", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), MyPublishActivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
 
         Button button_login = (Button)view.findViewById(R.id.button_login);
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(getActivity(),LoginActivity.class);
-
                 getActivity().startActivity(intent1);
-
             }
         });
 
@@ -63,32 +70,9 @@ public class we_fragment extends Fragment {
         button_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.CALL_PHONE)!=PackageManager.PERMISSION_GRANTED){
-//                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 1);
-//                }else
-//                    call();
-//                myReceiver = new MyReceiver();
-//                Intent intentReceiver = new Intent("Check");
-//                getActivity().sendBroadcast(intentReceiver);
-
-
-                Button button_zuji = (Button) view.findViewById(R.id.button4);
-                button_zuji.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getActivity(), "足迹", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), MyPublishActivity.class);
-                        getActivity().startActivity(intent);
-
-                    }
-                });
-
-                boolean call = true;
-
                 Snackbar.make(view, "即将拨打客服电话", Snackbar.LENGTH_SHORT).setAction("确认", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         Toast.makeText(getActivity(), "拨打", Toast.LENGTH_SHORT).show();
                         Timer timer = new Timer();
                         TimerTask task = new TimerTask() {
@@ -102,23 +86,12 @@ public class we_fragment extends Fragment {
                         timer.schedule(task, 2000);
                     }
                 }).show();
-
-
-
-
             }
         });
-
-
-
-
         return view;
-
-
     }
 
     private void initItem() {
-
             Item item = new Item(R.drawable.qintie, "我的订单");
             itemList.add(item);
             Item item1 = new Item(R.drawable.aixin2, "我的相册");
@@ -127,33 +100,8 @@ public class we_fragment extends Fragment {
             itemList.add(item2);
             Item item3 = new Item(R.drawable.shangjia, "商家入驻");
             itemList.add(item3);
-            Item item4 = new Item(R.drawable.qiqiu, "联系客服");
+            Item item4 = new Item(R.drawable.qiqiu, "联系在线客服");
             itemList.add(item4);
-
     }
 
-//    private void call(){
-//        try {
-//            Intent intent_call = new Intent(Intent.ACTION_CALL);
-//            intent_call.setData(Uri.parse("tell:18170402901"));
-//            getActivity().startActivity(intent_call);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        switch (requestCode) {
-//            case 1:
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    call();
-//                }else {
-//                    Toast.makeText(getContext(), "拒绝授予权限，该功能无法使用", Toast.LENGTH_SHORT).show();
-//                }
-//                break;
-//                default:
-//        }
-//    }
 }

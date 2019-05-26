@@ -8,11 +8,11 @@
 
     <Button
         android:id="@+id/button9"
-        android:layout_width="395dp"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/common_google_signin_btn_text_dark_default"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/corner_view"
         android:text="官方客服电话"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
