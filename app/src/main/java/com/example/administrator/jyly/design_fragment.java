@@ -54,7 +54,6 @@ public class design_fragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.design_fragment2, container, false);
 
-
         swipeRefreshLayout =  view.findViewById(R.id.swipe_refersh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -64,7 +63,6 @@ public class design_fragment extends Fragment {
             }
         });
 
-
         Button button_sys =  view.findViewById(R.id.button10);
         button_sys.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,8 +70,6 @@ public class design_fragment extends Fragment {
 //                Intent intent_takephoto = new Intent("android.media.action.IMAGE_CAPTURE");
 //                intent_takephoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
 //                startActivityForResult(intent_takephoto,TAKE_PHOTO);
-
-
                 // 通过包名获取要跳转的app，创建intent对象
                 Intent intent = getActivity().getPackageManager().getLaunchIntentForPackage("com.android.camera");
 // 这里如果intent为空，就说名没有安装要跳转的应用嘛
@@ -86,7 +82,6 @@ public class design_fragment extends Fragment {
                 }
             }
         });
-
         Button button_to_ideaActivity = (Button) view.findViewById(R.id.button11);
         button_to_ideaActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +90,6 @@ public class design_fragment extends Fragment {
                 startActivity(intent_to_idea);
             }
         });
-
         initList(designItemList);
         recyclerView =  view.findViewById(R.id.recyclerView);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
@@ -104,7 +98,6 @@ public class design_fragment extends Fragment {
         recyclerView.setAdapter(designAdapter);
         return view;
     }
-
 
 private  void initList(List<DesignItem> list){
     DesignItem a = new DesignItem(R.drawable.a21,"森系小清新\n" +
@@ -121,12 +114,7 @@ private  void initList(List<DesignItem> list){
             "风格： 浪漫\n" +
             "描述： 待你在灯下  预算5万\n");
     list.add(d);
-
-
-
 }
-
-
 private void refresh(){
         new Thread(new Runnable() {
             @Override
@@ -158,8 +146,5 @@ private void refresh(){
                 });
             }
         }).start();
-
-
 }
-
 }

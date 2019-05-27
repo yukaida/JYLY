@@ -3,12 +3,10 @@ package com.example.administrator.jyly.home;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.jyly.R;
@@ -21,14 +19,14 @@ public class Homeadapter2 extends  RecyclerView.Adapter<Homeadapter2.homeViewhol
     protected List<Homeitem2> mlist2;
 
     public class homeViewholder2 extends RecyclerView.ViewHolder{
-        public ImageView imageView;
+        public com.makeramen.roundedimageview.RoundedImageView imageView;
         public TextView textView;
         public View view_home;
         public homeViewholder2(@NonNull View itemView) {
             super(itemView);
             view_home = itemView;
-            imageView =itemView.findViewById(R.id.home_imageView);
-            textView =itemView.findViewById(R.id.home_textView);
+            imageView =itemView.findViewById(R.id.imageView_home_item2);
+            textView =itemView.findViewById(R.id.textview_home_item2);
         }
     }
     public Homeadapter2( List<Homeitem2> list,Context contexta) {

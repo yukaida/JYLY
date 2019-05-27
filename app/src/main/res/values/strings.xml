@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">金玉良缘</string>
+    <integer name="dayNumber">0</integer>
 </resources>

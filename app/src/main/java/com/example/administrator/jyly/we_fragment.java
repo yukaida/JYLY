@@ -1,5 +1,6 @@
 package com.example.administrator.jyly;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,10 +10,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.jyly.MyPublish.MyPublishActivity;
@@ -20,7 +24,10 @@ import com.example.administrator.jyly.loginAvtivity.LoginActivity;
 import com.example.administrator.jyly.we.Item;
 import com.example.administrator.jyly.we.We_recyclerView_adapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,12 +35,18 @@ import java.util.TimerTask;
 public class we_fragment extends Fragment {
     private List<Item> itemList = new ArrayList<>();
     private View view;
+
     private RecyclerView recyclerView;
     private We_recyclerView_adapter we_recyclerView_adapter;
     private Button button_call;
-    private Button button_kefu1;
-    private Button button_kefu2;
-    private Button button_kefu3;
+    private Button button_shouchang;
+
+    private TextView textView_day;
+    private Calendar calendar;
+    private DatePickerDialog datePickerDialog;
+
+    public int dayNumber=0;
+    private static final String TAG = "we_fragment";
     @Nullable
     @Override
 
@@ -57,7 +70,7 @@ public class we_fragment extends Fragment {
             }
         });
 
-        Button button_login = (Button)view.findViewById(R.id.button_login);
+        Button button_login =view.findViewById(R.id.button_login);
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +101,43 @@ public class we_fragment extends Fragment {
                 }).show();
             }
         });
+
+
+        button_shouchang = view.findViewById(R.id.button_sc);
+        button_shouchang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DefautAvtivity.class);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        textView_day = view.findViewById(R.id.textView_day);
+        textView_day.setText("婚礼倒计时"+dayNumber+"天");
+        textView_day.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar=Calendar.getInstance();
+                datePickerDialog=new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month=month+1;
+                        Log.d(TAG, "onDateSet: "+year+"/"+month+"/"+dayOfMonth);
+                        String dateHuli=year+"-"+month+"-"+dayOfMonth;
+
+                        dayNumber =(int)dateDiff(getDate(),dateHuli , "yyyy-MM-dd");
+                        //获取日期差
+
+                        Log.d(TAG, "onDateSet: 当前日期"+getDate()+"/  婚礼日期"+dateHuli+"/  相差"+dayNumber);
+                        textView_day.setText("婚礼倒计时"+dayNumber+"天");
+                    }
+                },calendar.get(Calendar.YEAR), calendar
+                               .get(Calendar.MONTH), calendar
+                               .get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.show();
+            }
+        });
+
         return view;
     }
 
@@ -104,4 +154,53 @@ public class we_fragment extends Fragment {
             itemList.add(item4);
     }
 
+    private String getDate(){
+        int year = calendar.get(Calendar.YEAR);
+//月
+        int month = calendar.get(Calendar.MONTH)+1;
+//日
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        String date=year+"-"+month+"-"+day;
+        return date;
+    }
+
+    public long dateDiff(String startTime, String endTime, String format) {
+        // 按照传入的格式生成一个simpledateformate对象
+        SimpleDateFormat sd = new SimpleDateFormat(format);
+        long nd = 1000 * 24 * 60 * 60;// 一天的毫秒数
+        long nh = 1000 * 60 * 60;// 一小时的毫秒数
+        long nm = 1000 * 60;// 一分钟的毫秒数
+        long ns = 1000;// 一秒钟的毫秒数
+        long diff;
+        long day = 0;
+        try {
+            // 获得两个时间的毫秒时间差异
+            diff = sd.parse(endTime).getTime()
+                    - sd.parse(startTime).getTime();
+            day = diff / nd;// 计算差多少天
+            long hour = diff % nd / nh;// 计算差多少小时
+            long min = diff % nd % nh / nm;// 计算差多少分钟
+            long sec = diff % nd % nh % nm / ns;// 计算差多少秒
+            // 输出结果
+            if (day<=0) {
+                Toast.makeText(getActivity(), "请选择一个未来的日期！", Toast.LENGTH_LONG).show();
+            }
+            Log.d(TAG, "dateDiff: 时间相差：" + day + "天");
+            if (day>=1) {
+                return day;
+            }else {
+                if (day==0) {
+                    return 1;
+                }else {
+                    return 0;
+                }
+
+            }
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+
+    }
 }

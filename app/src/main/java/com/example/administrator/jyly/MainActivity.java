@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         private MenuItem menuItem;
         public Uri Imageuri;
         public BroadcastReceiver broadcastReceiver;
+         public int dayNumber=0;
          public NavigationView navView;
 //
 //    public static final int TAKE_PHOTO=1;
