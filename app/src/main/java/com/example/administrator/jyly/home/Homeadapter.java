@@ -50,58 +50,51 @@ public class Homeadapter extends RecyclerView.Adapter<Homeadapter.homeViewholder
                 switch (position) {
                         case 0:
                             Intent intent_toWebActivity0 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity0.putExtra("webUrl", "https:/www.baidu.com");
+                            intent_toWebActivity0.putExtra("webUrl", "https://m.mijwed.com/sem-sem20190428.html?id=280&from_type=3g&channel_type=19&sem_key=nc_baidu_hq_15261_glc\n");
                             context.startActivity(intent_toWebActivity0);
                         break;
 
                         case 1:
                             Intent intent_toWebActivity1 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity1.putExtra("webUrl", "https:/www.baidu.com");
+                            intent_toWebActivity1.putExtra("webUrl", "https://h5.izhaowo.com/app/hotel-form");
                             context.startActivity(intent_toWebActivity1);
                         break;
 
                         case 2:
                             Intent intent_toWebActivity2 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity2.putExtra("webUrl", "https:/www.baidu.com");
+                            intent_toWebActivity2.putExtra("webUrl", "http://nc.jieqinwang.com/search/index.html");
                             context.startActivity(intent_toWebActivity2);
                         break;
 
                         case 3:
                             Intent intent_toWebActivity3 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity3.putExtra("webUrl", "https:/");
+                            intent_toWebActivity3.putExtra("webUrl", "https://h5.izhaowo.com/worker/v3");
                             context.startActivity(intent_toWebActivity3);
                         break;
 
                         case 4:
                             Intent intent_toWebActivity4 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity4.putExtra("webUrl", "https:/");
+                            intent_toWebActivity4.putExtra("webUrl", "https://m.tuniu.com/travel/customize/");
                             context.startActivity(intent_toWebActivity4);
                         break;
 
                         case 5:
                             Intent intent_toWebActivity5 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity5.putExtra("webUrl", "https:/");
+                            intent_toWebActivity5.putExtra("webUrl", "https://h5.izhaowo.com/worker/v4");
                             context.startActivity(intent_toWebActivity5);
                         break;
 
                         case 6:
                             Intent intent_toWebActivity6 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity6.putExtra("webUrl", "https:/");
+                            intent_toWebActivity6.putExtra("webUrl", "https://h5.izhaowo.com/case");
                             context.startActivity(intent_toWebActivity6);
                         break;
 
                         case 7:
                             Intent intent_toWebActivity7 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity7.putExtra("webUrl", "https:/");
+                            intent_toWebActivity7.putExtra("webUrl", "https://m.hunliji.com/package/list_9");
                             context.startActivity(intent_toWebActivity7);
                         break;
-
-                        case 8:
-                            Intent intent_toWebActivity8 = new Intent(context, Activity_webview.class);
-                            intent_toWebActivity8.putExtra("webUrl", "https:/");
-                            context.startActivity(intent_toWebActivity8);
-                        break;
-
                 }
             }
         });

@@ -1,8 +1,10 @@
 package com.example.administrator.jyly;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.administrator.jyly.Bomb.home;
+import com.example.administrator.jyly.MyPublish.MyPublishActivity;
 import com.example.administrator.jyly.dsroom.DSitem;
 import com.example.administrator.jyly.dsroom.DSroom_recyclerView_adapter;
 
@@ -29,6 +32,7 @@ public class dsroom_fragment extends Fragment {
     private RecyclerView recyclerView;
     private DSroom_recyclerView_adapter dSroom_recyclerView_adapter;
     private SwipeRefreshLayout swipeRefreshLayout_ds;
+    private FloatingActionButton floatingActionButton;
 
     @Nullable
     @Override
@@ -39,7 +43,6 @@ public class dsroom_fragment extends Fragment {
 
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
-
 
         dSroom_recyclerView_adapter=new DSroom_recyclerView_adapter(dsitemList);
         recyclerView.setAdapter(dSroom_recyclerView_adapter);
@@ -54,10 +57,14 @@ public class dsroom_fragment extends Fragment {
             }
         });
 
-
-
-
-
+        floatingActionButton = view.findViewById(R.id.floatingActionButton_shopingcar);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_toMypublish = new Intent(getActivity(), MyPublishActivity.class);
+                getActivity().startActivity(intent_toMypublish);
+            }
+        });
         return view;
     }
 
@@ -79,9 +86,6 @@ public class dsroom_fragment extends Fragment {
         }
     }
 
-
-
-
     private void refresh(){
         new Thread(new Runnable() {
             @Override
@@ -91,7 +95,6 @@ public class dsroom_fragment extends Fragment {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -109,13 +112,9 @@ public class dsroom_fragment extends Fragment {
                                 }
                             }
                         });
-
-
-
                         swipeRefreshLayout_ds.setRefreshing(false);
                     }
                 });
             }
         }).start();
-
     }}

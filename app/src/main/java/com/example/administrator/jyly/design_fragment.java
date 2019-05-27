@@ -55,7 +55,7 @@ public class design_fragment extends Fragment {
         View view = inflater.inflate(R.layout.design_fragment2, container, false);
 
 
-        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refersh);
+        swipeRefreshLayout =  view.findViewById(R.id.swipe_refersh);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -65,7 +65,7 @@ public class design_fragment extends Fragment {
         });
 
 
-        Button button_sys = (Button) view.findViewById(R.id.button10);
+        Button button_sys =  view.findViewById(R.id.button10);
         button_sys.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,127 +97,15 @@ public class design_fragment extends Fragment {
         });
 
         initList(designItemList);
-
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-
-
+        recyclerView =  view.findViewById(R.id.recyclerView);
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
-
         designAdapter = new DesignAdapter(designItemList);
         recyclerView.setAdapter(designAdapter);
-
-
-//        Button design_button = (Button) view.findViewById(R.id.design_button_send);
-//        design_button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-
-
-//
-//        Button button_takephoto = (Button) view.findViewById(R.id.button_design_takephoto);
-//        button_takephoto.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                File outputImage = new File(getActivity().getExternalCacheDir(), "output_image.jpg");
-//
-//                if (outputImage.exists()) {
-//                    outputImage.delete();
-//                }
-//                try {
-//                    outputImage.createNewFile();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                imageUri = FileProvider.getUriForFile(getActivity(), "com.example.camerralbumtest.fileprovider", outputImage);
-//
-//                Intent intent_takephoto = new Intent("android.media.action.IMAGE_CAPTURE");
-//                intent_takephoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-//                startActivityForResult(intent_takephoto,TAKE_PHOTO);
-//                MainActivity mainActivity=(MainActivity) getActivity();
-//                mainActivity.setImageuri(imageUri);
-//            }
-//        });
-//
-//        EditText editText = (EditText) view.findViewById(R.id.editText_design);
-//
-//
-//        FloatingActionButton fab =(FloatingActionButton) view.findViewById(R.id.floatingActionButton);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent_toMyPublish = new Intent(getActivity(), MyPublishActivity.class);
-//                getActivity().startActivity(intent_toMyPublish);
-//
-//            }
-//        });
-//
-//
-//
-//        Button button_chose = (Button) view.findViewById(R.id.button_design_chose);
-//        button_chose.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Intent intentToPickPic = new Intent(Intent.ACTION_PICK, null);
-////                // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
-////                intentToPickPic.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/jpeg");
-////                getActivity().startActivity(intentToPickPic);
-//                pickImageFromAlbum();
-//
-//            }
-//        });
-
         return view;
     }
 
-//    public void pickImageFromAlbum() {
-//        Intent intent = new Intent();
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        intent.setType("image/*");
-//        startActivityForResult(intent, 111);
-//
-//    }
 
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        switch (requestCode) {
-//            case TAKE_PHOTO:
-//                if (resultCode == RESULT_OK) {
-//                    try {
-//                        Bitmap bitmap=BitmapFactory.decodeStream(getActivity().getContentResolver().openInputStream(getImageUri()));
-//                        picture.setImageBitmap(bitmap);
-//                    } catch (FileNotFoundException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                break;
-//
-//            case 111:
-//                if (resultCode == RESULT_CANCELED) {
-//                    Toast.makeText(getActivity(), "点击取消从相册选择", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-//
-//                try {
-//                    Uri imageUri = data.getData();
-//                    Log.e("TAG", imageUri.toString());
-//                    picture.setImageURI(imageUri);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//
-//
-//            default:
-//                break;
-//        }
-//    }
 private  void initList(List<DesignItem> list){
     DesignItem a = new DesignItem(R.drawable.a21,"森系小清新\n" +
             "类似图片所示风格\n  预算10万以下");
@@ -253,7 +141,7 @@ private void refresh(){
                     @Override
                     public void run() {
                         final BmobQuery<Input> bmobQuery_input = new BmobQuery<>();
-                        bmobQuery_input.getObject("LpOoHHHu", new QueryListener<Input>()  {
+                        bmobQuery_input.getObject("yfhALLLa", new QueryListener<Input>()  {
                             @Override
                             public void done(Input object,BmobException e) {
                                 if(e==null){
@@ -261,7 +149,6 @@ private void refresh(){
                                     designItemList.add(h2);
                                     Toast.makeText(getContext(), "获取成功", Toast.LENGTH_SHORT).show();
                                 }else{
-
                                     Toast.makeText(getContext(), "查询失败："+ e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }

@@ -14,16 +14,21 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.jyly.home.Homeadapter;
 import com.example.administrator.jyly.home.Homeadapter2;
 import com.example.administrator.jyly.home.Homeitem;
 import com.example.administrator.jyly.home.Homeitem2;
+import com.example.administrator.jyly.myActivity.Activity_webview;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class home_fragment extends Fragment {
     private RecyclerView recyclerView;
@@ -41,8 +46,12 @@ public class home_fragment extends Fragment {
     private View view1, view2, view3;
     private List<View> viewList;//view数组
 
+    private ImageButton imageButton_mes;//我的消息
+    private ImageButton imageButton_weizhi;//位置
+    private TextView textView_weizhi;
+    private int weizhi=0;
 
-
+    private Button button_ssuo;
     @Nullable
     @Override
 
@@ -66,13 +75,48 @@ public class home_fragment extends Fragment {
         recyclerView.setAdapter(homeadapter);
         recyclerView2.setAdapter(homeadapter2);
 
+        textView_weizhi = view.findViewById(R.id.textView_weizhi);
+        imageButton_weizhi = view.findViewById(R.id.imageButton_weizhi);
+        imageButton_weizhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (weizhi == 0) {
+                    Timer timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            /**
+                             * 延时执行的代码
+                             */
+                            textView_weizhi.setText("南昌市");
+                        }
+                    }, 1500); // 延时1.5秒
+                    weizhi = 1;
+                } else {
+                    textView_weizhi.setText("未选择");
+                    weizhi=0;
+                }
+            }
+        });
 
-        ImageButton imageButton_mes = (ImageButton) view.findViewById(R.id.imageButton);
+
+        imageButton_mes = view.findViewById(R.id.imageButton);
         imageButton_mes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_toMEs = new Intent(getActivity(), mesActivity.class);
                 getActivity().startActivity(intent_toMEs);
+            }
+        });
+
+
+        button_ssuo = view.findViewById(R.id.button_sousuo);
+        button_ssuo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_toWebActivity7 = new Intent(getActivity(), Activity_webview.class);
+                intent_toWebActivity7.putExtra("webUrl", "https://m.hunliji.com/p/wedding/Public/wap/m/searchRt.html");
+                getActivity().startActivity(intent_toWebActivity7);
             }
         });
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.sw2);
@@ -128,49 +172,11 @@ public class home_fragment extends Fragment {
                 return viewList.get(position);
             }
         };
-
-
         viewPager.setAdapter(pagerAdapter);
-
-    
-
-//    swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//        @Override
-//        public void onRefresh() {
-//            refresh();
-//        }
-//    });
-//        Context context = getActivity();
-//        dia = new Dialog(context);
-//        dia.setContentView(R.layout.dialog_layout);
-//        ImageView imageView = (ImageView) dia.findViewById(R.id.imageView_dialog);
-//        imageView.setBackgroundResource(R.drawable.ic_launcher_foreground);
-//        //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
-//        dia.setCanceledOnTouchOutside(true); // Sets whether this dialog is
-//        Window w = dia.getWindow();
-//        WindowManager.LayoutParams lp = w.getAttributes();
-//        lp.x = 0;
-//        lp.y = 40;
-//        dia.onWindowAttributesChanged(lp);
-//        imageView.setOnClickListener(
-//                new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        dia.dismiss();
-//                    }
-//                });
-
         return view;
     }
 
     private void initHomeitemList(){
-//        for (int i = 0; i < 10; i++) {
-//            Homeitem item = new Homeitem(R.drawable.pic_dsroom, "item1");
-//            homeitemList.add(item);
-//            Homeitem item1 = new Homeitem(R.drawable.pic_dsroom, "item2");
-//            homeitemList.add(item1);
-//        }
         Homeitem a=new Homeitem(R.drawable.aixin,"婚礼策划");
         homeitemList.add(a);
         Homeitem b=new Homeitem(R.drawable.jiudian,"婚庆酒店");
@@ -181,7 +187,7 @@ public class home_fragment extends Fragment {
         homeitemList.add(d);
         Homeitem e=new Homeitem(R.drawable.gouwu,"蜜月套餐");
         homeitemList.add(e);
-        Homeitem f=new Homeitem(R.drawable.pic_dsroom,"婚庆视频");
+        Homeitem f=new Homeitem(R.drawable.pic_dsroom,"婚礼摄像");
         homeitemList.add(f);
         Homeitem g=new Homeitem(R.drawable.hongbao,"一价全包");
         homeitemList.add(g);
@@ -230,7 +236,6 @@ public class home_fragment extends Fragment {
                 });
             }
         }).start();
-
-
     }
+
 }
