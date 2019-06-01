@@ -26,6 +26,7 @@ import com.example.administrator.jyly.home.Homeitem2;
 import com.example.administrator.jyly.myActivity.Activity_webview;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,7 +36,6 @@ public class home_fragment extends Fragment {
     private View view;
     private Homeadapter homeadapter;
     private List<Homeitem> homeitemList=new ArrayList<>();
-
 
     private RecyclerView recyclerView2;
     private Homeadapter2 homeadapter2;
@@ -90,7 +90,7 @@ public class home_fragment extends Fragment {
                              */
                             textView_weizhi.setText("南昌市");
                         }
-                    }, 1500); // 延时1.5秒
+                    }, 1000); // 延时1.5秒
                     weizhi = 1;
                 } else {
                     textView_weizhi.setText("未选择");
@@ -108,7 +108,6 @@ public class home_fragment extends Fragment {
                 getActivity().startActivity(intent_toMEs);
             }
         });
-
 
         button_ssuo = view.findViewById(R.id.button_sousuo);
         button_ssuo.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +129,6 @@ public class home_fragment extends Fragment {
             }
         });
 
-
         viewPager=view.findViewById(R.id.viewPager);
 
         inflater=getLayoutInflater();
@@ -142,7 +140,6 @@ public class home_fragment extends Fragment {
         viewList.add(view1);
         viewList.add(view2);
         viewList.add(view3);
-
 
         PagerAdapter pagerAdapter = new PagerAdapter() {
 
@@ -221,7 +218,7 @@ public class home_fragment extends Fragment {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -231,6 +228,7 @@ public class home_fragment extends Fragment {
                     public void run() {
                         Homeitem2 h2=new Homeitem2(R.drawable.test,"  测试 测试 测试 测试 测试 测试 测试 测试 测试 测试 测试 测试 测试 测试 测试 测试 ");
                         homeitemList2.add(h2);
+//                        Collections.reverse(homeitemList2);
                         swipeRefreshLayout.setRefreshing(false);
                     }
                 });

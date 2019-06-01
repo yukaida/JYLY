@@ -3,6 +3,7 @@ package com.example.administrator.jyly.MyPublish;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
@@ -27,7 +29,7 @@ import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 
 public class MyPublishActivity extends AppCompatActivity {
-    private String[]data={};
+    private List<String> data = new ArrayList<>();
     public int orderSum=0;
     private static final String TAG = "MyPublishActivity";
     private TextView textView_orderSum;
@@ -51,10 +53,11 @@ public class MyPublishActivity extends AppCompatActivity {
 
         textView_orderSum = findViewById(R.id.textView_orderSum);
         sum();
-
-        ChangeTextView();
+        equal();
+//        ChangeTextView();
 
         ListView listView_order = findViewById(R.id.list_order);
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(MyPublishActivity.this, android.R.layout.simple_list_item_1, data);
         listView_order.setAdapter(adapter);
@@ -68,7 +71,7 @@ public class MyPublishActivity extends AppCompatActivity {
             public void done(Integer count, BmobException e) {
                 if(e==null){
                     orderSum =count;
-                    Log.d(TAG, "done: kd"+orderSum);
+//                    Log.d(TAG, "done: kd"+orderSum);
                     textView_orderSum.setText("订单数："+orderSum);
                     Toast.makeText(MyPublishActivity.this, "查询成功:订单数为"+count, Toast.LENGTH_SHORT).show();
                 }else{
@@ -84,9 +87,35 @@ public class MyPublishActivity extends AppCompatActivity {
         data = null;
     }
 
-    private void ChangeTextView(){
+//    private void ChangeTextView(){
+//
+//        Log.d(TAG, "ChangeTextView: kd"+orderSum);
+//
+//    }
 
-        Log.d(TAG, "ChangeTextView: kd"+orderSum);
 
+    /**
+     * name为football的类别
+     */
+    private void equal() {
+        BmobQuery<Order> Query = new BmobQuery<>();
+        Query.addWhereEqualTo("OrderNumber", 1)
+        ;
+        Query.findObjects(new FindListener<Order>() {
+            @Override
+            public void done(List<Order> object, BmobException e) {
+                if (e == null) {
+//                    Snackbar.make(mBtnEqual, "查询成功：" + object.size(), Snackbar.LENGTH_LONG).show();
+
+                        Log.d(TAG, "done: kd equal"+object.size());
+
+
+                } else {
+                    Log.e("BMOB", e.toString());
+                    Log.d(TAG, "done: kd"+e.toString());
+//                    Snackbar.make(mBtnEqual, e.getMessage(), Snackbar.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 }

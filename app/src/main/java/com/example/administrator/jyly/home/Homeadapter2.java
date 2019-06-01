@@ -42,8 +42,7 @@ public class Homeadapter2 extends  RecyclerView.Adapter<Homeadapter2.homeViewhol
         holder2.view_home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                int position = holder2.getAdapterPosition();
-//                Snackbar.make(view, "条目被点击", Snackbar.LENGTH_SHORT).show();
+
                 Intent intent_to_news=new Intent(context,newsActivity.class);
                 context.startActivity(intent_to_news);
             }

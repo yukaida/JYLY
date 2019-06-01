@@ -35,10 +35,6 @@ public class MainActivity extends AppCompatActivity {
         public BroadcastReceiver broadcastReceiver;
          public int dayNumber=0;
          public NavigationView navView;
-//
-//    public static final int TAKE_PHOTO=1;
-//    private ImageView picture;
-//    private Uri imageUri;
 
     private static final String TAG = "MainActivity";
 
@@ -84,20 +80,12 @@ public class MainActivity extends AppCompatActivity {
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         //设置沉浸式状态栏
 
-
-
-
-
-
-
             replaceFragment(new home_fragment());
 
             bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationView);
             bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-
         Bmob.initialize(this,"18412fa9be701c096295ccef5d74d1db");
-
 
             IntentFilter intentFilter = new IntentFilter("Check");
             broadcastReceiver=new BroadcastReceiver() {
@@ -149,8 +137,5 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.frameLayout, fragment);
             transaction.commit();
         }
-
-
-
 
     }

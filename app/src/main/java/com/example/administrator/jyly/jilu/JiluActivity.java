@@ -33,7 +33,7 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class JiluActivity extends AppCompatActivity {
     public static final int TAKE_PHOTO=1;//照片拍摄完毕以后的返回码
-    private ImageView picture;
+    private ImageView imageView_picture;
     public Uri imageUri;//照片的保存路径
 
 
@@ -56,7 +56,7 @@ public class JiluActivity extends AppCompatActivity {
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         //设置沉浸式状态栏
 
-        picture = findViewById(R.id.imageView_picture);//获取用于显示照片的ImageView的实例
+        imageView_picture = findViewById(R.id.imageView_picture);//获取用于显示照片的ImageView的实例
 
         Button button_takephoto = findViewById(R.id.button_design_takephoto);//获取Button_拍照的实例
 
@@ -122,7 +122,6 @@ public class JiluActivity extends AppCompatActivity {
             }
         });
     }
-
     public void pickImageFromAlbum() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -130,7 +129,6 @@ public class JiluActivity extends AppCompatActivity {
         startActivityForResult(intent, 111);
         //选择照片功能
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         //处理返回码  TAKE_PHOTO则启用拍照后的图片处理逻辑，111则启用从相册选择照片后的图片处理逻辑
@@ -140,7 +138,7 @@ public class JiluActivity extends AppCompatActivity {
                     try {
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
                         //压缩图片用于显示
-                        picture.setImageBitmap(bitmap);
+                        imageView_picture.setImageBitmap(bitmap);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -155,7 +153,7 @@ public class JiluActivity extends AppCompatActivity {
                 try {
                     Uri imageUri = data.getData();
                     Log.e("TAG", imageUri.toString());
-                    picture.setImageURI(imageUri);
+                    imageView_picture.setImageURI(imageUri);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
