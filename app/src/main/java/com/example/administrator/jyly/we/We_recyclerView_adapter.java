@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.administrator.jyly.Activity_add.SplashActivity;
 import com.example.administrator.jyly.JoinActivity;
 import com.example.administrator.jyly.MyPublish.MyPublishActivity;
 import com.example.administrator.jyly.R;
@@ -64,7 +66,7 @@ public class We_recyclerView_adapter extends RecyclerView.Adapter<We_recyclerVie
                         break;
 
                     case 2:
-                        Intent intent_toHunli = new Intent(context1, Activity_webview.class);
+                        Intent intent_toHunli = new Intent(context1, SplashActivity.class);
                         context1.startActivity(intent_toHunli);
                         break;
 
