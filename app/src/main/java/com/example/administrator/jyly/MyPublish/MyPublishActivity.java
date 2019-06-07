@@ -1,5 +1,6 @@
 package com.example.administrator.jyly.MyPublish;
 
+import android.R.layout;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,10 +12,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.jyly.Bomb.Order;
+import com.example.administrator.jyly.MainActivity;
 import com.example.administrator.jyly.R;
 
 import org.w3c.dom.Text;
@@ -29,10 +32,12 @@ import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 
 public class MyPublishActivity extends AppCompatActivity {
-    private List<String> data = new ArrayList<>();
+    private String[] data = {"订单1", "订单2"};
+
     public int orderSum=0;
     private static final String TAG = "MyPublishActivity";
     private TextView textView_orderSum;
+    private ListView listView_order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,15 +57,14 @@ public class MyPublishActivity extends AppCompatActivity {
         //设置沉浸式状态栏
 
         textView_orderSum = findViewById(R.id.textView_orderSum);
+        listView_order = findViewById(R.id.list_order);
         sum();
-        equal();
+//        equal();
 //        ChangeTextView();
-
-        ListView listView_order = findViewById(R.id.list_order);
-
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MyPublishActivity.this, android.R.layout.simple_list_item_1, data);
-        listView_order.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                MyPublishActivity.this, android.R.layout.simple_list_item_1, data);
+        ListView listView = (ListView) findViewById(R.id.list_order);
+        listView.setAdapter(adapter);
     }
 
     private void sum() {
@@ -84,7 +88,7 @@ public class MyPublishActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        data = null;
+
     }
 
 //    private void ChangeTextView(){
@@ -99,17 +103,17 @@ public class MyPublishActivity extends AppCompatActivity {
      */
     private void equal() {
         BmobQuery<Order> Query = new BmobQuery<>();
-        Query.addWhereEqualTo("OrderNumber", 1)
-        ;
+        Query.addWhereEqualTo("name", "name");
         Query.findObjects(new FindListener<Order>() {
             @Override
-            public void done(List<Order> object, BmobException e) {
+            public void done(List<Order> list, BmobException e) {
                 if (e == null) {
 //                    Snackbar.make(mBtnEqual, "查询成功：" + object.size(), Snackbar.LENGTH_LONG).show();
 
-                        Log.d(TAG, "done: kd equal"+object.size());
-
-
+                        Log.d(TAG, "done: kd equal  "+list.size());
+                    for (int i = 0; i < list.size(); i++) {
+                        Log.d(TAG, "done: yukaida   "+list.get(i).getName()+"/n");
+                    }
                 } else {
                     Log.e("BMOB", e.toString());
                     Log.d(TAG, "done: kd"+e.toString());

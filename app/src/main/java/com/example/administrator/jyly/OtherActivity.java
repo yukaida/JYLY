@@ -2,6 +2,7 @@ package com.example.administrator.jyly;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -15,11 +16,15 @@ import android.widget.Toast;
 
 import com.example.administrator.jyly.Bomb.Order;
 
+import java.util.Date;
+
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
 public class OtherActivity extends AppCompatActivity {
 public int x=1;
+public Date date;
+public String time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
@@ -56,6 +61,11 @@ public int x=1;
 
                 Order p2 = new Order();
                 p2.setOrderNumber(x);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");// HH:mm:ss
+//获取当前时间
+                Date date = new Date(System.currentTimeMillis());
+                time=simpleDateFormat.format(date);
+                p2.setName(time);
                 Toast.makeText(OtherActivity.this, "添加购物车成功", Toast.LENGTH_SHORT).show();
                 p2.save(new SaveListener<String>() {
                     @Override

@@ -1,13 +1,21 @@
 package com.example.administrator.jyly;
 
+import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -31,6 +39,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.content.Context.NOTIFICATION_SERVICE;
+import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class we_fragment extends Fragment {
     private List<Item> itemList = new ArrayList<>();
@@ -112,6 +123,11 @@ public class we_fragment extends Fragment {
             }
         });
 
+        final String channelId = "MarryDay";
+        String channelName = "婚礼日期通知";
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        createNotificationChannel(channelId, channelName, importance);
+
         textView_day = view.findViewById(R.id.textView_day);
         textView_day.setText("婚礼倒计时"+dayNumber+"天");
         textView_day.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +144,24 @@ public class we_fragment extends Fragment {
                         dayNumber =(int)dateDiff(getDate(),dateHuli , "yyyy-MM-dd");
                         //获取日期差
 
-                        Log.d(TAG, "onDateSet: 当前日期"+getDate()+"/  婚礼日期"+dateHuli+"/  相差"+dayNumber);
+                        Log.d(TAG, "onDateSet:yukaida 当前日期"+getDate()+"/  婚礼日期"+dateHuli+"/  相差"+dayNumber);
                         textView_day.setText("婚礼倒计时"+dayNumber+"天");
+
+                        NotificationManager manager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+                        Notification notification = new NotificationCompat.Builder(getContext(), "MarryDay")
+                                .setContentTitle("婚礼日期")
+                                .setContentText(dateHuli)
+                                .setWhen(System.currentTimeMillis())
+                                .setSmallIcon(R.drawable.aixin)
+                                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.aixin))
+                                .setAutoCancel(true)
+                                .setVibrate(new long[]{0, 1000, 1000, 1000})
+                                .setLights(Color.GREEN, 1000, 1000)
+                                .setContentText("金玉良缘app祝您万事如意"+ "\n"+"婚期：" +dateHuli)
+                                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(),R.drawable.aixin3)))
+                                .build();
+                        manager.notify(1, notification);
+                        Log.d(TAG, "onDateSet: yukaida notificationCreated");
                     }
                 },calendar.get(Calendar.YEAR), calendar
                                .get(Calendar.MONTH), calendar
@@ -152,6 +184,13 @@ public class we_fragment extends Fragment {
             itemList.add(item3);
             Item item4 = new Item(R.drawable.qiqiu, "联系在线客服");
             itemList.add(item4);
+    }
+
+    @TargetApi(Build.VERSION_CODES.O)
+    private void createNotificationChannel(String channelId, String channelName, int importance) {
+        NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
+        NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.createNotificationChannel(channel);
     }
 
     private String getDate(){

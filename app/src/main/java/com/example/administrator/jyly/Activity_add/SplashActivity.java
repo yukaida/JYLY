@@ -48,6 +48,6 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 handler.sendEmptyMessage(0);
             }
-        },3000);
+        },1000);
     }
 }
