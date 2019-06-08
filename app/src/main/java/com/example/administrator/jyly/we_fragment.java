@@ -27,6 +27,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.jyly.Activity_add.SetActivity;
 import com.example.administrator.jyly.MyPublish.MyPublishActivity;
 import com.example.administrator.jyly.loginAvtivity.LoginActivity;
 import com.example.administrator.jyly.we.Item;
@@ -56,6 +57,7 @@ public class we_fragment extends Fragment {
     private Calendar calendar;
     private DatePickerDialog datePickerDialog;
 
+    private TextView textView_set;
     public int dayNumber=0;
     private static final String TAG = "we_fragment";
     @Nullable
@@ -123,6 +125,14 @@ public class we_fragment extends Fragment {
             }
         });
 
+        textView_set=view.findViewById(R.id.textView_set);
+        textView_set.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_toSetActivity = new Intent(getActivity(), SetActivity.class);
+                getActivity().startActivity(intent_toSetActivity);
+            }
+        });
         final String channelId = "MarryDay";
         String channelName = "婚礼日期通知";
         int importance = NotificationManager.IMPORTANCE_HIGH;
