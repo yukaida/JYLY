@@ -1,10 +1,8 @@
 package com.example.administrator.jyly.MyPublish;
 
-import android.R.layout;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,27 +10,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.administrator.jyly.Bomb.Order;
-import com.example.administrator.jyly.MainActivity;
 import com.example.administrator.jyly.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.CountListener;
 import cn.bmob.v3.listener.FindListener;
 
 public class MyPublishActivity extends AppCompatActivity {
-    private String[] data = {"订单1", "订单2"};
+    private List<String> orderData = new ArrayList<>();
 
     public int orderSum=0;
     private static final String TAG = "MyPublishActivity";
@@ -56,67 +47,43 @@ public class MyPublishActivity extends AppCompatActivity {
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         //设置沉浸式状态栏
 
+
         textView_orderSum = findViewById(R.id.textView_orderSum);
         listView_order = findViewById(R.id.list_order);
-        sum();
-//        equal();
-//        ChangeTextView();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                MyPublishActivity.this, android.R.layout.simple_list_item_1, data);
-        ListView listView = (ListView) findViewById(R.id.list_order);
-        listView.setAdapter(adapter);
+        equal();
     }
-
-    private void sum() {
-        BmobQuery<Order> query = new BmobQuery<Order>();
-        query.addWhereEqualTo("OrderNumber",1);
-        query.count(Order.class, new CountListener() {
-            @Override
-            public void done(Integer count, BmobException e) {
-                if(e==null){
-                    orderSum =count;
-//                    Log.d(TAG, "done: kd"+orderSum);
-                    textView_orderSum.setText("订单数："+orderSum);
-                    Toast.makeText(MyPublishActivity.this, "查询成功:订单数为"+count, Toast.LENGTH_SHORT).show();
-                }else{
-                    Log.i("bmob","失败："+e.getMessage()+","+e.getErrorCode());
-                }
-            }
-        });
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
     }
-
-//    private void ChangeTextView(){
-//
-//        Log.d(TAG, "ChangeTextView: kd"+orderSum);
-//
-//    }
-
-
     /**
-     * name为football的类别
+     * 获取订单总数和具体id
      */
     private void equal() {
         BmobQuery<Order> Query = new BmobQuery<>();
-        Query.addWhereEqualTo("name", "name");
+        Query.addWhereEqualTo("OrderNumber", 1);
         Query.findObjects(new FindListener<Order>() {
             @Override
             public void done(List<Order> list, BmobException e) {
                 if (e == null) {
 //                    Snackbar.make(mBtnEqual, "查询成功：" + object.size(), Snackbar.LENGTH_LONG).show();
 
-                        Log.d(TAG, "done: kd equal  "+list.size());
+                        textView_orderSum.setText("订单数："+list.size());
                     for (int i = 0; i < list.size(); i++) {
-                        Log.d(TAG, "done: yukaida   "+list.get(i).getName()+"/n");
+                        Log.d(TAG, "done: yukaida   "+list.get(i).getObjectId()+","+list.get(i).getCreatedAt()+"/n");
+                        String temp="订单id:  "+list.get(i).getObjectId()+"\n"+"         "+"\n"+"                       创建时间:  "+list.get(i).getCreatedAt()+"\n";
+                        orderData.add(temp);
                     }
+
+                    ListView listView = findViewById(R.id.list_order);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                            MyPublishActivity.this, android.R.layout.simple_list_item_1, orderData);
+                    listView.setAdapter(adapter);
+
+                    Log.d(TAG, "done: yukaida orderData"+orderData.size());
                 } else {
                     Log.e("BMOB", e.toString());
-                    Log.d(TAG, "done: kd"+e.toString());
+                    Log.d(TAG, "done: yukaida"+e.toString());
 //                    Snackbar.make(mBtnEqual, e.getMessage(), Snackbar.LENGTH_LONG).show();
                 }
             }
