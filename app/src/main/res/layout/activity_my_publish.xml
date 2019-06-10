@@ -32,4 +32,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_clean_shoppingCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/corner_view"
+        android:text="清空购物车"
+        app:layout_constraintStart_toStartOf="@+id/list_order"
+        app:layout_constraintTop_toBottomOf="@+id/list_order" />
 </android.support.constraint.ConstraintLayout>

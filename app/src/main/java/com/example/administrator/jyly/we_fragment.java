@@ -20,10 +20,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +45,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
-import static android.support.v4.content.ContextCompat.getSystemService;
 
 public class we_fragment extends Fragment {
     private List<Item> itemList = new ArrayList<>();
@@ -56,6 +58,7 @@ public class we_fragment extends Fragment {
     private TextView textView_day;
     private Calendar calendar;
     private DatePickerDialog datePickerDialog;
+    private ImageView imageView_set;
 
     private TextView textView_set;
     public int dayNumber=0;
@@ -125,14 +128,15 @@ public class we_fragment extends Fragment {
             }
         });
 
-        textView_set=view.findViewById(R.id.textView_set);
-        textView_set.setOnClickListener(new View.OnClickListener() {
+        imageView_set=view.findViewById(R.id.imageView_set);
+        imageView_set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_toSetActivity = new Intent(getActivity(), SetActivity.class);
                 getActivity().startActivity(intent_toSetActivity);
             }
         });
+
         final String channelId = "MarryDay";
         String channelName = "婚礼日期通知";
         int importance = NotificationManager.IMPORTANCE_HIGH;
@@ -251,5 +255,10 @@ public class we_fragment extends Fragment {
         }
         return 0;
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.setmenu, menu);
     }
 }
