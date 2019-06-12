@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.jyly.Activity_add.SetActivity;
+import com.example.administrator.jyly.Activity_add.UploadActivity;
 import com.example.administrator.jyly.MyPublish.MyPublishActivity;
 import com.example.administrator.jyly.loginAvtivity.LoginActivity;
 import com.example.administrator.jyly.we.Item;
@@ -123,7 +124,7 @@ public class we_fragment extends Fragment {
         button_shouchang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), DefautAvtivity.class);
+                Intent intent = new Intent(getActivity(), UploadActivity.class);
                 getActivity().startActivity(intent);
             }
         });

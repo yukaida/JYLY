@@ -26,6 +26,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".Activity_add.UploadActivity"></activity>
         <activity android:name=".Activity_add.SetActivity" />
         <activity android:name=".Activity_add.SplashActivity">
             <intent-filter>

@@ -83,15 +83,7 @@ public class JiluActivity extends AppCompatActivity {
 
         //输入框实例
         final EditText editText = findViewById(R.id.editText_design);
-        //悬浮按钮我的发布页面  获取实例和设置监听器
-        FloatingActionButton fab =findViewById(R.id.floatingActionButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent_toMyPublish = new Intent(JiluActivity.this, MyPublishActivity.class);
-                startActivity(intent_toMyPublish);
-            }
-        });
+
         //选择照片按钮实例，设施监听器
         Button button_ch= findViewById(R.id.button_design_chose);
         button_ch.setOnClickListener(new View.OnClickListener() {

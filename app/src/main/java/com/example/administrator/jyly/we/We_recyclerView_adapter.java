@@ -66,7 +66,8 @@ public class We_recyclerView_adapter extends RecyclerView.Adapter<We_recyclerVie
                         break;
 
                     case 2:
-                        Intent intent_toHunli = new Intent(context1, SplashActivity.class);
+                        Intent intent_toHunli = new Intent(context1, Activity_webview.class);
+                        intent_toHunli.putExtra("webUrl", "https://m.v.qq.com/x/page/w/m/l/w0822b9rcml.html?");
                         context1.startActivity(intent_toHunli);
                         break;
 

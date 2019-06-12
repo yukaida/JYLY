@@ -36,7 +36,6 @@ public class design_fragment extends Fragment {
     public Uri imageUri;
 
     private SwipeRefreshLayout swipeRefreshLayout;
-
     public List<DesignItem> designItemList = new ArrayList<>();
     private RecyclerView recyclerView;
     private String mes;
@@ -48,7 +47,6 @@ public class design_fragment extends Fragment {
     public void setImageUri(Uri imageUri) {
         this.imageUri = imageUri;
     }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -133,8 +131,8 @@ private void refresh(){
                             @Override
                             public void done(Input object,BmobException e) {
                                 if(e==null){
-                                    DesignItem h2=new DesignItem(R.drawable.car,object.getInputmes());
-                                    designItemList.add(h2);
+//                                    DesignItem h2=new DesignItem(object.getImage().getFileUrl(),object.getInputmes());
+//                                    designItemList.add(h2);
                                     Toast.makeText(getContext(), "获取成功", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Toast.makeText(getContext(), "查询失败："+ e.getMessage(), Toast.LENGTH_SHORT).show();
